@@ -21,7 +21,7 @@ git clone https://github.com/orlikoski/fanoverlord.git
 ```
 
 ## Add The Custom Details to .env
-Modify the following `fanoverlord/.env` file for each time needed to configure Slacktee. This will be used to fill in the `/etc/slacktee.conf` and `docker-entrypoint.sh` file within the docker image at build time.
+Modify the following `fanoverlord/.env` file for each variable needed to configure Slacktee. This will be used to fill in the `/etc/slacktee.conf` and `docker-entrypoint.sh` file within the docker image at build time.
 
 ### Server Details and HealtCheck URL
 Open `docker-entrypoint.sh` and edit the following lines to match the environment
