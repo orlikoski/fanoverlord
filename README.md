@@ -1,12 +1,12 @@
 # FanOverlord
-This is a Docker container that uses IMPI to monitor and control the fans on a Dell R610 server through the iDRAC using raw commands
+This is a Docker container that uses IPMI to monitor and control the fans on a Dell R610 server through the iDRAC using raw commands
 
 https://github.com/NoLooseEnds/Scripts/tree/master/R710-IPMI-TEMP was the source of my knowledge on how to issue the commands and it was the inspiration for this effort.
 
 # HowTo Steps
 ## Configure iDRAC
  - [Set IP Address for iDRAC and ensure docker can communicate with it](https://docs.extrahop.com/current/configure-i-drac/)
- - [Enable IMPI in the iDRAC ](http://www.fucking-it.com/articles/dell-idrac/214-dell-idrac-configure-ipmi)
+ - [Enable IPMI in the iDRAC ](http://www.fucking-it.com/articles/dell-idrac/214-dell-idrac-configure-ipmi)
 
 ## Install Docker
  - https://docs.docker.com/install/  
