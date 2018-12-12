@@ -1,0 +1,18 @@
+version: '3'
+services:
+  fanoverlord:
+    image: fanoverlord:latest
+    container_name: fanoverlord
+    environment:
+      - WEBHOOK_URL=${WEBHOOK_URL}
+      - UPLOAD_TOKEN=${UPLOAD_TOKEN}
+      - CHANNEL=${CHANNEL}
+      - TMP_DIR=${TMP_DIR}
+      - USERNAME=${USERNAME}
+      - ICON=${ICON}
+      - ATTACHMENT=${ATTACHMENT}
+      - IPMIHOST=${IPMIHOST}
+      - IPMIUSER=${IPMIUSER}
+      - IPMIPW=${IPMIPW}
+      - HC_URL=${HC_URL}
+    restart: always
