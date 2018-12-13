@@ -43,34 +43,46 @@ sed -i 's/attachment=""/attachment="'"$ATTACHMENT"'"/g' /etc/slacktee.conf
 # TEMPERATURE
 # Change this to the temperature in celcius you are comfortable with.
 # If the temperature goes above the set degrees it will send raw IPMI command to enable dynamic fan control
-StartMidTemp="29"
-MidTemp=( "29" "30" "31" )
-HighTemp=( "32" "33" "34" )
+StartMidTemp="28"
+MidTemp=( "28" "29" )
+HighTemp=( "30" "31" )
+VeryHighTemp=( "32" "33" )
 MAXTEMP="34"
 
-# Last Octal controls RPM value
+
+
+# Last Octal controls values to know
+# Query Fan speeds
+# ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW sdr type fan
+#
+# Fan Power Percentages
+# 0x00 = 0%
+# 0x64 = 100%
+#
+# R610 RPM values
 # 0b = 2280 RPM
 # 0e = 2640 RPM
 # 0f = 2760 RPM
 # 10 = 3000 RPM
 # 1a = 4800 RPM
+# 20 = 5880 RPM
 # 30 = 8880 RPM
 # 50 = 14640 RPM
 
-# Default level: 2280 RPM
+# Default level: 3000 RPM
 function FanDefault()
 {
-  echo "Info: Activating manual fan speeds (2280 RPM)"
+  echo "Info: Activating manual fan speeds (3000 RPM)"
   ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x01 0x00
-  ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x02 0xff 0x0b
+  ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x02 0xff 0x10
 }
 
-# Mid-Level: 4800 RPM
+# Mid-Level: 5880 RPM
 function FanMid()
 {
-  echo "Info: Activating manual fan speeds (4800 RPM)"
+  echo "Info: Activating manual fan speeds (5880 RPM)"
   ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x01 0x00
-  ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x02 0xff 0x1a
+  ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x02 0xff 0x20
 }
 
 # High-level: 8800 RPM
@@ -79,6 +91,14 @@ function FanHigh()
   echo "Info: Activating manual fan speeds (8880 RPM)"
   ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x01 0x00
   ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x02 0xff 0x30
+}
+
+# Very-High-level: 14640 RPM
+function FanVeryHigh()
+{
+  echo "Info: Activating manual fan speeds (14640 RPM)"
+  ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x01 0x00
+  ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW raw 0x30 0x30 0x02 0xff 0x50
 }
 
 # Auto-controled
@@ -150,6 +170,14 @@ do
     EMERGENCY=false
     NOTIFY=false
     FanHigh
+  fi
+
+  array_contains VeryHighTemp $CurrentTemp
+  result=$(echo $?)
+  if [ "$result" -eq 1 ] ; then
+    EMERGENCY=false
+    NOTIFY=false
+    FanVeryHigh
   fi
 
   healthcheck
