@@ -28,7 +28,6 @@ git clone https://github.com/orlikoski/fanoverlord.git
 Modify the following `fanoverlord/.env` file for each variable needed to configure Slacktee, HealthCheck, and the IPMI connection information. This will be used to fill in the `/etc/slacktee.conf` and `docker-entrypoint.sh` file within the docker image at build time.
 
 ### Server Details and HealtCheck URL
-Open `docker-entrypoint.sh` and edit the following lines to match the environment
 ```
 IPMIHOST=<IP Address of the iDRAC on the Server>
 IPMIUSER=<User for the iDRAC>
