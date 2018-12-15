@@ -43,11 +43,12 @@ sed -i 's/attachment=""/attachment="'"$ATTACHMENT"'"/g' /etc/slacktee.conf
 # TEMPERATURE
 # Change this to the temperature in celcius you are comfortable with.
 # If the temperature goes above the set degrees it will send raw IPMI command to enable dynamic fan control
+# According to iDRAC Min Warning is 42C and Failure (shutdown) is 47C
 StartMidTemp="28"
-MidTemp=( "28" "29" )
-HighTemp=( "30" "31" )
-VeryHighTemp=( "32" "33" )
-MAXTEMP="34"
+MidTemp=( "28" "29" "30" "31" )
+HighTemp=( "32" "33" "34" "35" )
+VeryHighTemp=( "36" "37" "38" "39" "40" )
+MAXTEMP="40"
 
 
 
