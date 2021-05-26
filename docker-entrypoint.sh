@@ -19,9 +19,6 @@ IPMIHOST=${IPMIHOST} # <IP Address of the iDRAC on the Server>
 IPMIUSER=${IPMIUSER} # <User for the iDRAC>
 IPMIPW=${IPMIPW} # <Password for the iDRAC
 
-# HealthCheck HC_URL
-HC_URL=${HC_URL} # <Unique Ping URL component>
-
 # Slacktee Configs
 WEBHOOK_URL=${WEBHOOK_URL}
 UPLOAD_TOKEN=${UPLOAD_TOKEN}
@@ -117,8 +114,6 @@ function gettemp()
 
 function healthcheck()
 {
-  # healthchecks.io
-  curl -fsS --retry 3 $HC_URL >/dev/null 2>&1
   if $EMERGENCY; then
     echo "Temperature is NOT OK ($CurrentTemp C). Emergency Status: $EMERGENCY"
   else

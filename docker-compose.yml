@@ -14,5 +14,4 @@ services:
       - IPMIHOST=${IPMIHOST}
       - IPMIUSER=${IPMIUSER}
       - IPMIPW=${IPMIPW}
-      - HC_URL=${HC_URL}
     restart: always
