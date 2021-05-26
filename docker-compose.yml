@@ -7,4 +7,5 @@ services:
       - IPMIHOST=${IPMIHOST}
       - IPMIUSER=${IPMIUSER}
       - IPMIPW=${IPMIPW}
+      - SLEEP=${SLEEP}
     restart: always
