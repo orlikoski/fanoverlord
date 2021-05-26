@@ -19,24 +19,6 @@ IPMIHOST=${IPMIHOST} # <IP Address of the iDRAC on the Server>
 IPMIUSER=${IPMIUSER} # <User for the iDRAC>
 IPMIPW=${IPMIPW} # <Password for the iDRAC
 
-# Slacktee Configs
-WEBHOOK_URL=${WEBHOOK_URL}
-UPLOAD_TOKEN=${UPLOAD_TOKEN}
-CHANNEL=${CHANNEL}
-TMP_DIR=${TMP_DIR}
-USERNAME=${USERNAME}
-ICON=${ICON}
-ATTACHMENT=${ATTACHMENT}
-
-# Configure Slacktee
-sed -i 's#webhook_url=""#webhook_url="'"$WEBHOOK_URL"'"#g' /etc/slacktee.conf
-sed -i 's/upload_token=""/upload_token="'"$UPLOAD_TOKEN"'"/g' /etc/slacktee.conf
-sed -i 's/channel=""/channel="'"$CHANNEL"'"/g' /etc/slacktee.conf
-sed -i 's#tmp_dir=""#tmp_dir="'"$TMP_DIR"'"#g' /etc/slacktee.conf
-sed -i 's/username=""/username="'"$USERNAME"'"/g' /etc/slacktee.conf
-sed -i 's/icon=""/icon="'"$ICON"'"/g' /etc/slacktee.conf
-sed -i 's/attachment=""/attachment="'"$ATTACHMENT"'"/g' /etc/slacktee.conf
-
 # TEMPERATURE
 # Change this to the temperature in celcius you are comfortable with.
 # If the temperature goes above the set degrees it will send raw IPMI command to enable dynamic fan control
